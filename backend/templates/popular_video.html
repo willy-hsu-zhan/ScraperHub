@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>熱門影片管理</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .top-bar a, .top-bar button {
+      text-decoration: none;
+      padding: 6px 12px;
+      background: #007bff;
+      color: white;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+    }
+    .top-bar a:hover, .top-bar button:hover { background: #0056b3; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    a { margin: 0 5px; }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div>
+      <a href="{% url 'dashboard' %}">← 返回 Dashboard</a>
+    </div>
+    <div>
+      <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">登出</button>
+      </form>
+    </div>
+  </div>
+
+  <h1>熱門影片管理</h1>
+
+  <hr>
+
+  <!-- 資料列表 -->
+  <h2>所有影片</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>標題</th>
+      <th>頻道名稱</th>
+      <th>影片 ID</th>
+      <th>完整網址</th> <!-- 新增欄位 -->
+      <th>發布時間</th>
+      <th>操作</th>
+    </tr>
+    {% for obj in page_obj %}
+    <tr>
+      <td>{{ obj.id }}</td>
+      <td>{{ obj.title }}</td>
+      <td>{{ obj.channel_name }}</td>
+      <td>{{ obj.video_id }}</td>
+      <td>
+        <a href="https://www.youtube.com/watch?v={{ obj.video_id }}" target="_blank">
+          https://www.youtube.com/watch?v={{ obj.video_id }}
+        </a>
+      </td>
+      <td>{{ obj.published_at|date:"Y/m/d H:i:s" }}</td>
+      <td>
+        <a href="?edit_id={{ obj.id }}">編輯</a>
+        <a href="?delete_id={{ obj.id }}" onclick="return confirm('確定刪除嗎?');">刪除</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div style="margin-top: 15px;">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">上一頁</a>
+    {% endif %}
+    <span>第 {{ page_obj.number }} 頁 / 共 {{ page_obj.paginator.num_pages }} 頁</span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">下一頁</a>
+    {% endif %}
+  </div>
+
+  <hr>
+
+  <!-- 新增 / 編輯表單 -->
+  <h2>{% if edit_id %}編輯{% else %}新增{% endif %}影片</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if edit_id %}更新{% else %}新增{% endif %}</button>
+    {% if edit_id %}
+      <a href="{% url 'popular_video' %}">取消編輯</a>
+    {% endif %}
+  </form>
+
+</body>
+</html>

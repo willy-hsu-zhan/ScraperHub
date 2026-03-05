@@ -1,0 +1,9 @@
+Django==4.2.29
+PyMySQL==1.1.1
+selenium==4.16.0
+requests==2.32.0
+beautifulsoup4==4.13.0
+lxml==4.9.3
+python-telegram-bot==20.5
+pytz==2026.3
+python-dotenv==1.0.1

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>推播資料後台 Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+
+    /* 上方導覽列 */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .top-bar a, .top-bar button {
+      text-decoration: none;
+      padding: 6px 12px;
+      background: #007bff;
+      color: white;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .top-bar a:hover, .top-bar button:hover {
+      background: #0056b3;
+    }
+
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 8px; }
+    li a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    li a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- 上方導覽列 -->
+  <div class="top-bar">
+    <h1>推播後台系統</h1>
+    <div>
+      <form method="POST" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">登出</button>
+      </form>
+    </div>
+  </div>
+
+  <p>點擊下方分類查看過去推播的資料：</p>
+
+  <ul>
+    <li><a href="{% url 'gov_ojts' %}">近期政府在職課程 - 過去推播紀錄</a></li>
+    <li><a href="{% url 'delivery_coupons' %}">UberEat / Foodpanda / Foodomo 優惠碼 - 過去推播紀錄</a></li>
+    <li><a href="{% url 'free_games_4gamers' %}">免費 EGS / Steam 遊戲 - 過去推播紀錄</a></li>
+    <li><a href="{% url 'birthday_discounts' %}">生日優惠 - 過去推播紀錄</a></li>
+    <li><a href="{% url 'rent_591' %}">租屋資訊 - 過去推播紀錄</a></li>
+    <li><a href="{% url 'popular_video' %}">熱門影片 - 過去推播紀錄</a></li>
+  </ul>
+
+</body>
+</html>
