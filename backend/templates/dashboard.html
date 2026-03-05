@@ -2,40 +2,9 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8">
-  <title>推播資料後台 Dashboard</title>
-  <style>
-    body { font-family: Arial, sans-serif; }
-
-    /* 上方導覽列 */
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .top-bar a, .top-bar button {
-      text-decoration: none;
-      padding: 6px 12px;
-      background: #007bff;
-      color: white;
-      border-radius: 4px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .top-bar a:hover, .top-bar button:hover {
-      background: #0056b3;
-    }
-
-    ul { list-style: none; padding: 0; }
-    li { margin-bottom: 8px; }
-    li a {
-      text-decoration: none;
-      color: #007bff;
-    }
-    li a:hover { text-decoration: underline; }
-  </style>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'backend/dashboard.css' %}">
+  <title>推播後台系統 Dashboard</title>
 </head>
 <body>
 
