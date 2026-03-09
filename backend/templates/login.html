@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   {% load static %}
   <link rel="stylesheet" href="{% static 'backend/login.css' %}">
-  <title>登入</title>
+  <title>推播後台系統</title>
 </head>
 <body>
   <div class="login-container">
     <h1>推播後台系統</h1>
-    <form id="loginForm">
+    <form id="loginForm" method="post">
+      {% csrf_token %}
       <input type="text" name="username" placeholder="帳號" required>
       <input type="password" name="password" placeholder="密碼" required>
       <button type="submit">登入</button>
