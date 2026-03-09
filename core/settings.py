@@ -40,7 +40,7 @@ DATABASES = {
 # Telegram
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
 
 # Application definition
 
@@ -136,3 +136,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "backend" / "static",
 ]
+
+STATIC_ROOT = os.getenv("STATIC_ROOT", "/var/www/ScraperHub/static")
+MEDIA_ROOT = os.getenv("MEDIA_ROOT", "/var/www/ScraperHub/media")
